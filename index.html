@@ -1,0 +1,480 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<script type="text/template">
+						## Test Driven Development 
+						### in
+						### .NET Core using XUnit
+
+						Ravi Mandal 
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### WHO AM I ? 
+						#### If I had to explain myself in terms of C# Code
+						##### I would be 
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						```cs
+						var speaker = new Speaker();
+						speaker.Name = "Ravi Mandal";
+						speaker.Designation = "Software Developer";
+						speaker.Organiztion = "Unlimited Technology Pvt. Ltd."
+						speaker.Skills = new string[]
+						{
+							"C#","ASP.NET","Angular JS","Microsoft Azure","iOS",
+							"Objective-C","PHP", "Team Foundation Server",
+							"Windows Server","Linux"
+						};
+						speaker.Metadata = new string[]
+						{
+							"Microsoft Certified Professional",
+							"Microsoft Most Valuable Professional",
+							"Believes in Open Source Community",
+							"Active in community, leads Nepal Cloud User Group",
+							"Loves working in Linux and OSS Tools",
+							"Loves learning and implementing 
+							software / cloud development patterns and designs"
+						}
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Test Driven Development  
+						#### What is all the hype about?
+					</script>
+				</section>
+				<!-- Let's Get Started-->
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 1: Create a new folder for our project and change directory 
+						```sh
+						mkdir unit-test-chap-1
+						cd unit-test-chap-1
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 2: Open the folder in your cool editor. Mine is VS Code. :) 
+						```sh
+						code .
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 3: Create global.json file and add project structure
+						```json
+						{
+							"projects": [
+								"src",
+								"test"
+							]
+						}
+						
+
+						```
+						![Step 3](../images/unit-test-chap-1-screen-1.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 4: Go Back to Terminal then create 'src' directory and change directory to it and create Fibonacci.Services directory.
+						```sh
+						mkdir src
+						cd src
+						mkdir Fibonacci.Services
+						cd Fibonacci.Services
+						```
+						![Step 4](../images/unit-test-chap-1-screen-2.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 5: Run the following command to create .NET Project
+						```sh
+						dotnet new -t lib
+						```
+						![Step 5](../images/unit-test-chap-1-screen-3.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 6: Rename Library.cs as Fibonacci.cs. To use test-driven development (TDD), you'll create a failing implementation of the Fibonacci class:
+						```cs
+						using System;
+						namespace FibonacciCalculation
+						{
+							public class Fibonacci
+							{
+								public int Fib(int n)
+								{
+									return 0;
+								}
+							}
+
+						}
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a new project in .NET with Unit Test
+						##### Step 6: Rename Library.cs as Fibonacci.cs. To use test-driven development (TDD), you'll create a failing implementation of the Fibonacci class:
+						![Step 6](../images/unit-test-chap-1-screen-4.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a test project in .NET
+						##### Step 1: Get back to main directory and create tests directory and then Fibonacci.Tests directory
+						![Step 2-1](../images/unit-test-chap-1-screen-5.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a test project in .NET
+						##### Step 2: Change directory to Fibonacci.Tests and run following command
+						```sh
+						dotnet new -t xunittest
+						```
+						![Step 2-2](../images/unit-test-chap-1-screen-6.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Creating a test project in .NET
+						##### The project structure would look like this for now
+						![Step 2-2-i](../images/unit-test-chap-1-screen-7.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Adding dependency in test project
+						##### Open project.json file of Fibonacci.Tests project and scroll to dependencies area
+						![Step 3-i](../images/unit-test-chap-1-screen-8.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Adding dependency in test project
+						##### Step 1: Add dependency to Fibonacci.Services project
+						```json
+						"Fibonacci.Services":{
+      						"target" : "project"
+   						}
+						```
+						![Step 3](../images/unit-test-chap-1-screen-9.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Writing First Unit Test
+						##### Step 1: Go to Fibonacci.Tests project and rename the test.cs file to FibonacciUnitTest.cs and edit code to:
+						```cs
+						using System;
+						using Xunit;
+
+						namespace Fibonaci.UnitTest
+						{
+							public class FibonacciUnitTest
+							{
+								[Fact]
+								public void Given_0_Return_0()
+								{
+									Assert.True(true);
+								}
+							}
+						}
+						```
+						
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Writing First Unit Test
+						
+						![Step 4-1](../images/unit-test-chap-1-screen-10.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Writing First Unit Test
+						##### Step 2: Complete the code for FibonacciUnitTest.cs file:
+						```cs
+						using System;
+						using Xunit;
+						using FibonacciCalculation;
+						namespace FibonacciUnitTest
+						{
+							public class FibonacciUnitTest
+							{
+								[Fact]
+								public void Given_0_Return_0()
+								{
+									//arrange
+									Fibonacci fibo = new Fibonacci();
+									int i = 0;
+									//act
+									int result = fibo.Fib(i);
+									//assert
+									Assert.Equal(result,0);
+								}
+							}
+						}
+						```
+						
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Writing First Unit Test
+						
+						![Step 4-1](../images/unit-test-chap-1-screen-11.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Step 3: Go back to root folder and restore packages
+						```sh
+						dotnet restore
+						```
+						![Step 4-1](../images/unit-test-chap-1-screen-12.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Step 3: Navigate to Fibonacci.Tests folder and run test command
+						```sh
+						cd tests/
+						cd Fibonacci.Tests/
+						dotnet test
+						```
+						![Step 4-1](../images/unit-test-chap-1-screen-13.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Our first test just passed ! 
+						### Now let's write a failing test. 
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Writing Second Unit Test
+						##### Step 1: Add another test method in FibonacciUnitTest.cs file
+						```cs
+						
+						[Fact]
+						public void Given_1_Return_1()
+						{
+							//arrange
+							Fibonacci fibo = new Fibonacci();
+							int i = 1;
+							//act
+							int result = fibo.Fib(i);
+							//assert
+							Assert.Equal(result,1);
+						}
+					
+						```
+						
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Writing Second Unit Test
+						##### Step 2: Run the test
+						```sh
+						dotnet test
+						```
+						![Step 4-1](../images/unit-test-chap-1-screen-14.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Re-writing the logic
+						##### Step 1: Change the Fib function in Fibonaci class
+						```cs
+						public class Fibonacci
+						{
+							public int Fib(int n)
+							{
+								if(n==0) {
+									return 0;
+								}
+								else if(n <= 2){
+									return 1;
+								}
+								return 0;
+							}
+						}
+						```
+						
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Re-writing the logic
+						##### Step 1: Change the Fib function in Fibonaci class
+						
+						![Step 5-1](../images/unit-test-chap-1-screen-15.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Re-writing the logic
+						##### Step 2: Run the test
+						```sh
+						dotnet test
+						```
+						![Step 5-1](../images/unit-test-chap-1-screen-16.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Succesfully wrote logic for our next test ! 
+						### Now let's complete the generic logic for all numbers
+						
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Adding test cases to the unit test
+						### Step 1: Add these test cases
+						```cs
+						[Fact]
+						public void Fib_Given2_Return1()
+						{
+							//arrange
+							Fibonacci fibo = new Fibonacci();
+							int i = 2;
+							//act
+							int result = fibo.Fib(i);
+							//assert
+							Assert.Equal(1, result);
+						}
+
+						[Fact]
+						public void Fib_Given3_Return2()
+						{
+							//arrange
+							Fibonacci fibo = new Fibonacci();
+							int i = 3;
+							//act
+							int result = fibo.Fib(i);
+							//assert
+							Assert.Equal(2, result);
+						}
+
+						[Fact]
+						public void Fib_Given4_Return3()
+						{
+							//arrange
+							Fibonacci fibo = new Fibonacci();
+							int i = 4;
+							//act
+							int result = fibo.Fib(i);
+							//assert
+							Assert.Equal(3, result);
+						}
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Re-writing the logic for second time
+						#### Step 1: Change the Fib function in Fibonaci class
+						```cs
+						public class Fibonacci
+						{
+							public int Fib(int n)
+							{
+								if(n==0) {
+									return 0;
+								}
+								else if(n <= 2){
+									return 1;
+								}
+								return Fib(n-1) + Fib (n-2);
+							}
+						}
+						```
+						
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						##### Re-writing the logic for second time
+						##### Step 2: Run the test
+						```sh
+						dotnet test
+						```
+						![Step 6-1](../images/unit-test-chap-1-screen-17.PNG)
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### All of our codes are running perfectly and has passed all tests. 
+						##### This is how we start by writing tests and then write logics to make that test pass. 
+						
+						
+					</script>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
